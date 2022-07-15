@@ -1,0 +1,2 @@
+### A Multi-Threaded Web Server
+As a part of learning multi-threaded application using Rust programming language [Ref. https://doc.rust-lang.org/stable/book/title-page.html]. A simple web server that uses thread-pool to handle multiple connection.
