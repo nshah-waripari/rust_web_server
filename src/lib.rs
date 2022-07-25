@@ -22,6 +22,7 @@ impl ThreadPool {
     /// 
     /// # Panics
     /// The 'new' function will panic if the size is zero.
+    
     pub fn new(size: usize) -> ThreadPool {
         assert!(size > 0);
 
@@ -35,7 +36,7 @@ impl ThreadPool {
         ThreadPool { workers, sender}
     }
 
-    // excute the closure passed as a parameter
+    /// Send the job it wants to execute down the sending side of the channel
     pub fn execute<F>(&self, f: F)
     where
         F: FnOnce() + Send + 'static,
