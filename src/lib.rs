@@ -41,7 +41,7 @@ impl ThreadPool {
         F: FnOnce() + Send + 'static,
         {
             let job = Box::new(f);
-            self.sender.send(Message::NewJob(job)).unwrap();
+            self.sender.send(Message::NewJob(job)).expect("ThreadPool::execute unable to send job into queue.")
         }
 }
 
@@ -74,7 +74,7 @@ struct Worker {
 impl Worker {
     fn new(id: usize, receiver: Arc<Mutex<mpsc::Receiver<Message>>>) -> Worker {
         let thread = thread::spawn(move || loop {
-            let message = receiver.lock().unwrap().recv().unwrap();
+            let message = receiver.lock().unwrap().recv().expect("Worker::new unable to receive message");
             match  message {
                 Message::NewJob(job) => {
                     println!("Worker {} got a job; executing.", id);

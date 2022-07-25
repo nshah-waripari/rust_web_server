@@ -12,7 +12,7 @@ fn main() {
     // time but with the restrictions of pre-defined number of threads
     let pool = ThreadPool::new(4);
 
-    for stream in listener.incoming().take(2) {
+    for stream in listener.incoming() {
         let stream = stream.unwrap();
 
         println!("Connection established!");
